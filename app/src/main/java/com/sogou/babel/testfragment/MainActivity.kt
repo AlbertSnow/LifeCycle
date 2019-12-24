@@ -4,12 +4,15 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Switch
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 
 class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionListener,
     MainFragment.OnFragmentInteractionListener {
 
     private var isAddBack: Boolean = false
+    private var isAddBackAnimation: Boolean = false
     private lateinit var mMainContainer: View
     private lateinit var mOverlayContainer: View
 
@@ -21,7 +24,6 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         initView()
     }
 
@@ -31,18 +33,27 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
     }
 
     private fun initView() {
-        mMainContainer = findViewById<View>(R.id.main_container_layout);
-        mOverlayContainer = findViewById<View>(R.id.overlay_container_layout);
+        mMainContainer = findViewById<View>(R.id.main_container_layout)
+        mOverlayContainer = findViewById<View>(R.id.overlay_container_layout)
 
+        val switch = findViewById<Switch>(R.id.switch_add_back)
+        switch.setOnCheckedChangeListener { buttonView, isChecked ->
+            isAddBack = isChecked
+            Toast.makeText(this, "isAddBackStack: $isAddBack", Toast.LENGTH_LONG).show()
+        }
+        switch.isChecked = false
+
+        val switchAnimation = findViewById<Switch>(R.id.switch_add_back_animation)
+        switchAnimation.setOnCheckedChangeListener { buttonView, isChecked ->
+            isAddBackAnimation = isChecked
+            Toast.makeText(this, "isAddBackAnimation: $isAddBackAnimation", Toast.LENGTH_LONG).show()
+        }
+        switchAnimation.isChecked = false
     }
 
     fun addMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(
-            R.anim.activity_in_from_right,
-            R.anim.activity_out_to_right,
-            R.anim.activity_in_from_right,
-            R.anim.activity_out_to_right)
+        setAnimation(transaction)
         transaction.add(R.id.main_container_layout, mainFragment)
         if (isAddBack) {
             transaction.addToBackStack(null)
@@ -51,15 +62,26 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
         transaction.commit()
     }
 
+    private fun setAnimation(transaction: FragmentTransaction) {
+        if (isAddBackAnimation) {
+            transaction.setCustomAnimations(
+                R.anim.activity_in_from_right,
+                R.anim.activity_out_to_right
+            )
+        } else {
+            transaction.setCustomAnimations(
+                R.anim.activity_in_from_right,
+                R.anim.activity_out_to_right,
+                R.anim.activity_in_from_right,
+                R.anim.activity_out_to_right
+            )
+        }
+    }
+
 
     fun removeMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(
-            R.anim.activity_in_from_right,
-            R.anim.activity_out_to_right,
-            R.anim.activity_in_from_right,
-            R.anim.activity_out_to_right
-        )
+        setAnimation(transaction)
         transaction.remove(mainFragment)
 
         if (isAddBack) {
@@ -129,11 +151,6 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
     }
 
     override fun onFragmentInteraction(uri: Uri) {
-    }
-
-    fun switchAddBack(view: View) {
-        isAddBack = !isAddBack
-        Toast.makeText(this, "isAddBackStack: $isAddBack", Toast.LENGTH_LONG).show()
     }
 
 }

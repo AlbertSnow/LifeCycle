@@ -117,14 +117,22 @@
         android:onClick="showOverlay"
         />
 
-    <Button
+    <Switch
         android:id="@+id/switch_add_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SwitchAddBack"
+        android:text="AddBackStack"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/show_overlay_btn"
-        android:onClick="switchAddBack"
+        />
+
+    <Switch
+        android:id="@+id/switch_add_back_animation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AddBackStackAnimation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switch_add_back"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
