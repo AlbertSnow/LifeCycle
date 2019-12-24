@@ -38,20 +38,34 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
 
     fun addMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(
+            R.anim.activity_in_from_right,
+            R.anim.activity_out_to_right,
+            R.anim.activity_in_from_right,
+            R.anim.activity_out_to_right)
         transaction.add(R.id.main_container_layout, mainFragment)
         if (isAddBack) {
             transaction.addToBackStack(null)
         }
+
         transaction.commit()
     }
 
 
     fun removeMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(
+            R.anim.activity_in_from_right,
+            R.anim.activity_out_to_right,
+            R.anim.activity_in_from_right,
+            R.anim.activity_out_to_right
+        )
         transaction.remove(mainFragment)
+
         if (isAddBack) {
             transaction.addToBackStack(null)
         }
+
         transaction.commit()
     }
 
@@ -64,6 +78,16 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
         }
         transaction.commit()
     }
+
+    fun addReplaceMain(view: View) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.main_container_layout, mainReplaceFragment)
+        if (isAddBack) {
+            transaction.addToBackStack(null)
+        }
+        transaction.commit()
+    }
+
 
     fun addOverlay(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
