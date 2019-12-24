@@ -91,22 +91,13 @@ class OverlayFragment : BaseFragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String): OverlayFragment {
-            val overlayFragment: OverlayFragment = Proxy.newProxyInstance(
-                OverlayFragment::class.java.classLoader,
-                arrayOf<Class<*>>(OverlayFragment::class.java),
-                PrintMethodProxHandler()
-            ) as OverlayFragment
-
-            overlayFragment.apply {
+        fun newInstance(param1: String, param2: String): OverlayFragment =
+            OverlayFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
-
-            return overlayFragment
-        }
 
     }
 
