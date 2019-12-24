@@ -4,10 +4,12 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionListener,
     MainFragment.OnFragmentInteractionListener {
 
+    private var isAddBack: Boolean = false
     private lateinit var mMainContainer: View
     private lateinit var mOverlayContainer: View
 
@@ -23,6 +25,11 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
         initView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Toast.makeText(this, "isAddBackStack: $isAddBack", Toast.LENGTH_LONG).show()
+    }
+
     private fun initView() {
         mMainContainer = findViewById<View>(R.id.main_container_layout);
         mOverlayContainer = findViewById<View>(R.id.overlay_container_layout);
@@ -32,6 +39,9 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
     fun addMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container_layout, mainFragment)
+        if (isAddBack) {
+            transaction.addToBackStack(null)
+        }
         transaction.commit()
     }
 
@@ -39,6 +49,9 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
     fun removeMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.remove(mainFragment)
+        if (isAddBack) {
+            transaction.addToBackStack(null)
+        }
         transaction.commit()
     }
 
@@ -46,6 +59,9 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
     fun replaceMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container_layout, mainReplaceFragment)
+        if (isAddBack) {
+            transaction.addToBackStack(null)
+        }
         transaction.commit()
     }
 
@@ -53,12 +69,18 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
         val transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         transaction.add(R.id.overlay_container_layout, overlayFragment)
+        if (isAddBack) {
+            transaction.addToBackStack(null)
+        }
         transaction.commit()
     }
 
     fun removeOverlay(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.remove(overlayFragment)
+        if (isAddBack) {
+            transaction.addToBackStack(null)
+        }
         transaction.commit()
     }
 
@@ -66,6 +88,9 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
         val transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         transaction.hide(overlayFragment)
+        if (isAddBack) {
+            transaction.addToBackStack(null)
+        }
         transaction.commit()
     }
 
@@ -73,10 +98,18 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
         val transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         transaction.show(overlayFragment)
+        if (isAddBack) {
+            transaction.addToBackStack(null)
+        }
         transaction.commit()
     }
 
     override fun onFragmentInteraction(uri: Uri) {
+    }
+
+    fun switchAddBack(view: View) {
+        isAddBack = !isAddBack
+        Toast.makeText(this, "isAddBackStack: $isAddBack", Toast.LENGTH_LONG).show()
     }
 
 }
