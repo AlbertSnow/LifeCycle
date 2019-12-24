@@ -12,13 +12,8 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
     private lateinit var mOverlayContainer: View
 
     private val mainFragment: MainFragment = MainFragment.newInstance("", "")
+    private val mainReplaceFragment: MainReplaceFragment = MainReplaceFragment.newInstance("", "")
     private var overlayFragment: OverlayFragment = OverlayFragment.newInstance("", "")
-
-    enum class FragmentStatus {
-        NO_MAIN, NO_OVERLAY, HAVE_OVERLAY
-    }
-
-    private var status: FragmentStatus = FragmentStatus.NO_MAIN
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,53 +27,56 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
         mMainContainer = findViewById<View>(R.id.main_container_layout);
         mOverlayContainer = findViewById<View>(R.id.overlay_container_layout);
 
-        findViewById<View>(R.id.change_overlay_btn).setOnClickListener {
-            onFragmentOperate()
-        }
     }
 
-    private fun onFragmentOperate() {
-
-        when (status) {
-            FragmentStatus.NO_MAIN -> {
-                status = FragmentStatus.NO_OVERLAY
-                showMain()
-            }
-            FragmentStatus.NO_OVERLAY -> {
-                status = FragmentStatus.HAVE_OVERLAY
-                showOverlay()
-            }
-            FragmentStatus.HAVE_OVERLAY -> {
-                status = FragmentStatus.NO_OVERLAY
-                hideOverlay()
-            }
-        }
-    }
-
-    private fun showMain() {
+    fun addMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.main_container_layout, mainFragment)
         transaction.commit()
     }
 
-    private fun showOverlay() {
 
+    fun removeMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
+        transaction.remove(mainFragment)
+        transaction.commit()
+    }
 
+
+    fun replaceMain(view: View) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_container_layout, mainReplaceFragment)
+        transaction.commit()
+    }
+
+    fun addOverlay(view: View) {
+        val transaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         transaction.add(R.id.overlay_container_layout, overlayFragment)
         transaction.commit()
     }
 
-    private fun hideOverlay() {
-
+    fun removeOverlay(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.remove(overlayFragment)
         transaction.commit()
     }
 
-    override fun onFragmentInteraction(uri: Uri) {
+    fun hideOverlay(view: View) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        transaction.hide(overlayFragment)
+        transaction.commit()
     }
 
+    fun showOverlay(view: View) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        transaction.show(overlayFragment)
+        transaction.commit()
+    }
+
+    override fun onFragmentInteraction(uri: Uri) {
+    }
 
 }
