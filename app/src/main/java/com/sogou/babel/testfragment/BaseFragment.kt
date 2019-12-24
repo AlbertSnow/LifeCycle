@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-open class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
 
     fun log(msg: String) {
         com.sogou.babel.testfragment.util.log("${javaClass.simpleName}: $msg")
