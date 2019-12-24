@@ -53,7 +53,10 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
 
     fun addMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
-        setAnimation(transaction)
+        transaction.setCustomAnimations(
+            R.anim.activity_in_from_right,
+            R.anim.activity_out_to_right
+        )
         transaction.add(R.id.main_container_layout, mainFragment)
         if (isAddBack) {
             transaction.addToBackStack(null)
@@ -81,7 +84,11 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
 
     fun removeMain(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
-        setAnimation(transaction)
+        transaction.setCustomAnimations(
+            R.anim.activity_in_from_right,
+            R.anim.activity_out_to_bottom
+        )
+
         transaction.remove(mainFragment)
 
         if (isAddBack) {
