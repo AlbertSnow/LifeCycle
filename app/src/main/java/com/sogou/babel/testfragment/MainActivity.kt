@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
 
     fun addOverlay(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        transaction.setCustomAnimations(R.anim.slide_in_from_bottom, 0)
         transaction.add(R.id.overlay_container_layout, overlayFragment)
         if (isAddBack) {
             transaction.addToBackStack(null)
@@ -130,6 +130,7 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
 
     fun removeOverlay(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(0, R.anim.activity_out_to_right)
         transaction.remove(overlayFragment)
         if (isAddBack) {
             transaction.addToBackStack(null)
@@ -139,7 +140,7 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
 
     fun hideOverlay(view: View) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        transaction.setCustomAnimations(0, R.anim.activity_out_to_right)
         transaction.hide(overlayFragment)
         if (isAddBack) {
             transaction.addToBackStack(null)

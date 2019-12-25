@@ -7,7 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import java.lang.reflect.Proxy
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -99,6 +100,30 @@ class OverlayFragment : BaseFragment() {
                 }
             }
 
+    }
+
+
+
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
+
+        try {
+            val anim = AnimationUtils.loadAnimation(activity, nextAnim)
+            if (!enter) {
+                anim.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationRepeat(animation: Animation?) {
+                    }
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                    }
+
+                    override fun onAnimationStart(animation: Animation?) {
+                    }
+                })
+            }
+            return anim
+        } catch (ex: Exception) {
+            return null
+        }
     }
 
 
