@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".OverlayFragment">
 
-    <com.sogou.babel.testfragment.DragView
+    <com.sogou.babel.testfragment.widget.DragView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/holo_blue_light"

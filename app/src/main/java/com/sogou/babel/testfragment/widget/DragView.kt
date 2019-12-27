@@ -1,4 +1,4 @@
-package com.sogou.babel.testfragment
+package com.sogou.babel.testfragment.widget
 
 import android.content.Context
 import android.util.AttributeSet
