@@ -1,12 +1,17 @@
 package com.sogou.babel.testfragment
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Switch
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
+import com.sogou.babel.testfragment.databinding.ActivityMainBinding
+import com.sogou.babel.testfragment.viewmodel.FragmentSetViewModel
+
 
 class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionListener,
     MainFragment.OnFragmentInteractionListener {
@@ -23,7 +28,11 @@ class MainActivity : AppCompatActivity(), OverlayFragment.OnFragmentInteractionL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        val activityMainBinding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val model = ViewModelProviders.of(this)[FragmentSetViewModel::class.java]
+        activityMainBinding.viewModel = model
+        activityMainBinding.executePendingBindings()
         initView()
     }
 

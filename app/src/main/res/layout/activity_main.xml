@@ -1,139 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ActivityMain"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <FrameLayout
-        android:id="@+id/main_container_layout"
+        <variable
+            name="viewModel"
+            type="com.sogou.babel.testfragment.viewmodel.FragmentSetViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+        tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/overlay_container_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+        <TextView
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ActivityMain" />
+
+        <FrameLayout
+            android:id="@+id/main_container_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:id="@+id/overlay_container_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
-    <Button
-        android:id="@+id/add_main_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AddMain"
-        android:onClick="addMain"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
-        />
+        <Button
+            android:id="@+id/add_main_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:onClick="addMain"
+            android:text="AddMain" />
 
-    <Button
-        android:id="@+id/remove_main_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="removeMain"
-        android:onClick="removeMain"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_main_btn"
-        />
+        <Button
+            android:id="@+id/remove_main_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_main_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="removeMain"
+            android:text="removeMain" />
 
-    <Button
-        android:id="@+id/add_overlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="addOverlay"
-        android:onClick="addOverlay"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/remove_main_btn"
-        />
+        <Button
+            android:id="@+id/add_overlay"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/remove_main_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="addOverlay"
+            android:text="addOverlay" />
 
-    <Button
-        android:id="@+id/remove_overlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="removeOverlay"
-        android:onClick="removeOverlay"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_overlay"
-        />
+        <Button
+            android:id="@+id/remove_overlay"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="removeOverlay"
+            android:text="removeOverlay" />
 
-    <Button
-        android:id="@+id/replace_main_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ReplaceMain"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/remove_overlay"
-        android:onClick="replaceMain"
-        />
+        <Button
+            android:id="@+id/replace_main_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/remove_overlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="replaceMain"
+            android:text="ReplaceMain" />
 
-    <Button
-        android:id="@+id/add_replace_main_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AddReplaceMain"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/replace_main_btn"
-        android:onClick="addReplaceMain"
-        />
+        <Button
+            android:id="@+id/add_replace_main_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/replace_main_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="addReplaceMain"
+            android:text="AddReplaceMain" />
 
-    <Button
-        android:id="@+id/hide_overlay_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hideOverlay"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_replace_main_btn"
-        android:onClick="hideOverlay"
-        />
+        <Button
+            android:id="@+id/hide_overlay_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_replace_main_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="hideOverlay"
+            android:text="hideOverlay" />
 
-    <Button
-        android:id="@+id/show_overlay_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="showOverlay"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hide_overlay_btn"
-        android:onClick="showOverlay"
-        />
+        <Button
+            android:id="@+id/show_overlay_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hide_overlay_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="showOverlay"
+            android:text="showOverlay" />
 
-    <Switch
-        android:id="@+id/switch_add_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AddBackStack"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/show_overlay_btn"
-        />
+        <Switch
+            android:id="@+id/switch_add_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/show_overlay_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AddBackStack" />
 
-    <Switch
-        android:id="@+id/switch_add_back_animation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:text="AddBackStackAnimation"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/switch_add_back"
-        />
+        <Switch
+            android:id="@+id/switch_add_back_animation"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/switch_add_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AddBackStackAnimation"
+            android:visibility="gone" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
